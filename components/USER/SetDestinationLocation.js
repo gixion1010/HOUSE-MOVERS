@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput,Platform, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -6,9 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import { IconButton } from 'react-native-paper';
 
 const SetPickupLocationScreen = () => {
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [locationType, setLocationType] = useState('');
-  const [otherCategory, setOtherCategory] = useState('');
+  const [pickupLocation, setPickupLocation] = useState(' ');
+  const [locationType, setLocationType] = useState(' ');
+  const [otherCategory, setOtherCategory] = useState(' ');
   const navigation = useNavigation();
 
   const handlePickupLocationChange = (text) => {
@@ -38,20 +38,22 @@ const SetPickupLocationScreen = () => {
     navigation.navigate('Set Pickup Location');
   }; 
 
-  navigation.setOptions({
+  useEffect(() => {
+    navigation.setOptions({
       headerRight: () => (
-      <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
-        <IconButton
-          icon="arrow-left"
-          size={14}
-          //onPress={handleGoBack}
-          color="#8B0000"
-          style={{marginBottom: 0}}
-        />
-        <Text style={styles.titleText}>Go Back</Text>
-      </TouchableOpacity>
-    ),
-  });
+        <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
+          <IconButton
+            icon="arrow-left"
+            size={14}
+            //onPress={handleGoBack}
+            color="#8B0000"
+            style={{ marginBottom: 0 }}
+          />
+          <Text style={styles.titleText}>Go Back</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

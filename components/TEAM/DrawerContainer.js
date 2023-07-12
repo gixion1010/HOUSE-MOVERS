@@ -13,8 +13,7 @@ export default function DrawerContainer(navigation) {
   const Drawer = createDrawerNavigator();
   const showHiddenScreen = false;
   return (
-      <Drawer.Navigator useLegacyImplementation
-        screenOptions={{ drawerPosition: 'left' }} initialRouteName="HOME">
+      <Drawer.Navigator screenOptions={{ drawerPosition: 'left' }} initialRouteName="HOME">
         <Drawer.Screen name='Profile Account' component={ProfileAccount} options={{
           title:"Profile Account",
           gestureEnabled: true,

@@ -1,28 +1,56 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Image, Pressable, TextInput} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { IconButton } from 'react-native-paper';
+
 const Home = ({navigation}) => {
   const Stack = createNativeStackNavigator();
+  const handleGoBack = () => {
+    navigation.navigate('View Team');
+  };
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
+          <IconButton
+            icon="arrow-left"
+            size={14}
+            //onPress={handleGoBack}
+            color="#8B0000"
+            style={{ marginBottom: 0 }}
+          />
+          <Text style={styles.titleText}>Go Back</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require('../../assets/z.png')}
+        source={require('../../assets/ff.png')}
       />
-      <View style={styles.container2}> 
+      <View style={styles.container2}>
+        <View style={styles.heading}><Text style={styles.textheading}>ORDER PLACED!!! {'\n'}{'\n'} Your OrderID is<Text style={styles.orderId}> 355KJL975</Text> {'\n'}{'\n'} <Text style={styles.message}>Team Owner or Driver will make contact with you shortly! Thanks!!!</Text></Text></View> 
         <Pressable style={({pressed}) => [
               styles.button1,
               pressed && {opacity: 1.8, backgroundColor:'#987200'},
-              ]} onPress={() => {navigation.navigate('Set Pickup Location');}}>
-          <Text style={styles.textbutton1}> Start New Order </Text> 
+              ]}>
+          <Text style={styles.textbutton1}> Contact Team Owner </Text> 
         </Pressable>
         <Pressable style={({pressed}) => [
               styles.button2,
               pressed && {opacity: 1.8, backgroundColor:'#987200'},
-              ]} onPress={() => {navigation.navigate('Orders');}}>
-          <Text style={styles.textbutton2}> Orders </Text> 
+              ]} onPress={() => {navigation.navigate('Vehicle Data');}}>
+          <Text style={styles.textbutton2}> Contact Driver </Text> 
+      </Pressable>
+      <Pressable style={({pressed}) => [
+              styles.button3,
+              pressed && {opacity: 1.8, backgroundColor:'#987200'},
+              ]} onPress={() => {navigation.navigate('HOME');}}>
+        <Text style={styles.textbutton3}> Return To Home Page </Text> 
       </Pressable>
       </View>
     </View>
@@ -40,8 +68,8 @@ const styles = StyleSheet.create({
   },
   logo:{
     resizeMode: 'center',
-    height: "120%",
-    width: "100%",
+    height: "100%",
+    width: "160%",
     alignItems: 'center',
     justifyContent: 'center',
     display:'flex',
@@ -49,9 +77,9 @@ const styles = StyleSheet.create({
   },
   container2: {
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
     width:"100%",
-    height:'50%',
+    height:'60%',
     display:'flex',
     flex: 1,
     backgroundColor: "#000000",
@@ -59,15 +87,35 @@ const styles = StyleSheet.create({
     borderTopLeftRadius:25,
     borderTopRightRadius:25,
   },
+  heading:{
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textheading:{
+     marginTop:30,
+     color:'red',
+     fontWeight:'bold',
+     alignItems: 'center',
+     justifyContent: 'center',
+     textAlign: 'center',
+  },
+  orderId:{
+    color:'#33FFF9',
+    fontWeight:'bold',
+  },
+  message:{
+    color:'#4CFF33',
+    fontWeight:'bold',
+  },
    button1:{
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 80,
+    paddingHorizontal: 57,
     borderRadius: 15,
     //elevation: 3,
     backgroundColor:'#BF9000',
-    marginTop:10,
+    marginTop:60,
     marginBottom:10,
   },
   textbutton1:{
@@ -81,7 +129,7 @@ const styles = StyleSheet.create({
    alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 116,
+    paddingHorizontal: 80,
     borderRadius: 15,
     //elevation: 3,
     backgroundColor:'#BF9000',
@@ -99,7 +147,7 @@ const styles = StyleSheet.create({
    alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 45,
+    paddingHorizontal: 50,
     borderRadius: 15,
     //elevation: 3,
     backgroundColor:'#BF9000',
@@ -113,5 +161,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'black',
   },
-
+  titleContainer: {
+    flexDirection: 'coloumn',
+    alignItems: 'center',
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  titleText:{ 
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#8B0000',
+  },
 });

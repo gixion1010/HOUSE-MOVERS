@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, TextInput, Text, TouchableOpacity, ScrollView, StyleSheet,Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
@@ -44,28 +44,31 @@ const ItemDetailsScreen = () => {
           Alert.alert('Insufficient Item Details', 'Please enter at least two item details');
           return;
       }
+      navigation.navigate('Select-Team');
     // Perform desired action when the Next button is pressed
     //Alert.alert('Next Button Pressed');
   };
 
   const handleGoBack = () => {
-    navigation.navigate('Set Pickup Location');
+    navigation.navigate('Set Destination Location');
   }; 
 
-  navigation.setOptions({
+  useEffect(() => {
+    navigation.setOptions({
       headerRight: () => (
-      <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
-        <IconButton
-          icon="arrow-left"
-          size={14}
-          //onPress={handleGoBack}
-          color="#8B0000"
-          style={{marginBottom: 0}}
-        />
-        <Text style={styles.titleText}>Go Back</Text>
-      </TouchableOpacity>
-    ),
-  });
+        <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
+          <IconButton
+            icon="arrow-left"
+            size={14}
+            //onPress={handleGoBack}
+            color="#8B0000"
+            style={{ marginBottom: 0 }}
+          />
+          <Text style={styles.titleText}>Go Back</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container1}> 
