@@ -71,22 +71,22 @@ const LabourOrderDetails = () => {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Order Items</Text>
-          {order.orderItems.map((item, index) => (
-            <View key={index} style={styles.item}>
+          {/* {order.orderItems.map((item, index) => ( */}
+            {/* <View key={index} style={styles.item}>
               <Text>Name: {item.name}</Text>
               <Text>Description: {item.description}</Text>
               <Text>Quantity: {item.quantity}</Text>
-            </View>
-          ))}
+            </View> */}
+          {/* ))} */}
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.orderId, styles.redText]}>
+          {/* <Text style={[styles.orderId, styles.redText]}>
             Order ID: {order.orderId}
           </Text>
           <Text style={[styles.orderStatus, styles.blueText]}>
             Order Status: {order.orderStatus}
-          </Text>
+          </Text> */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
