@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput,Platform, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TextInput, Platform, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { IconButton } from 'react-native-paper';
 
 const SetPickupLocationScreen = () => {
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [locationType, setLocationType] = useState('');
-  const [otherCategory, setOtherCategory] = useState('');
+  const [pickupLocation, setPickupLocation] = useState(' ');
+  const [locationType, setLocationType] = useState(' ');
+  const [otherCategory, setOtherCategory] = useState(' ');
   const navigation = useNavigation();
 
   const handlePickupLocationChange = (text) => {
@@ -36,26 +36,29 @@ const SetPickupLocationScreen = () => {
 
   const handleGoBack = () => {
     navigation.navigate('HOME');
-  }; 
+  };
 
-  navigation.setOptions({
+  useEffect(() => {
+    navigation.setOptions({
       headerRight: () => (
-      <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
-        <IconButton
-          icon="arrow-left"
-          size={14}
-          //onPress={handleGoBack}
-          color="#8B0000"
-          style={{marginBottom: 0}}
-        />
-        <Text style={styles.titleText}>Go Back</Text>
-      </TouchableOpacity>
-    ),
-  });  
+        <TouchableOpacity style={styles.titleContainer} onPress={handleGoBack}>
+          <IconButton
+            icon="arrow-left"
+            size={14}
+            //onPress={handleGoBack}
+            color="#8B0000"
+            style={{ marginBottom: 0 }}
+          />
+          <Text style={styles.titleText}>Go Back</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       <MapView style={styles.map} initialRegion={{ latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
-      provider={Platform.OS === 'android' ? 'google' : 'google'}>
+        provider={Platform.OS === 'android' ? 'google' : 'google'}>
         <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }} />
       </MapView>
 
@@ -139,8 +142,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: -10,
     backgroundColor: '#bf9000',
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -182,7 +185,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginLeft: 10,
   },
-  inputotheroption:{
+  inputotheroption: {
     backgroundColor: 'white',
     borderRadius: 8,
     padding: 10,
